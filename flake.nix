@@ -1,5 +1,5 @@
 {
-  description = "Home Manager configuration of vasilysterekhov";
+  description = "Home Manager configuration of seumas";#
 
   inputs = {
     nixpkgs.url = "nixpkgs/nixos-25.05";
@@ -28,7 +28,7 @@
     steamappidlist.flake = false;
   };
 
-  outputs = { nixpkgs, nixpkgs-frozen, home-manager, nix-flatpak
+    outputs = { nixpkgs, nixpkgs-frozen, home-manager, nix-flatpak
     , stellarkey-source, spotify-adblock-source, smokeapi-zip, steamappidlist
     , ... }:
     let
@@ -64,7 +64,7 @@
           };
       };
     in {
-      homeConfigurations."vasilysterekhov" =
+      homeConfigurations."seumas" =
         home-manager.lib.homeManagerConfiguration {
           inherit pkgs;
 
