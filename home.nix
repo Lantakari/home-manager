@@ -77,8 +77,7 @@
   #Automatically remove old home-manager configuration generations
   services.home-manager.autoExpire.enable = true;
 
-
   # Git user and email
-  programs.git.userName = "piss";
-  programs.git.userEmail = "trotsky.maoism@bordiga.marx";
+  programs.git.userName = "Lantakari";
+  programs.git.userEmail = "TeimoPie@proton.me";
 }

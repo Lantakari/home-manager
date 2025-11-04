@@ -9,6 +9,8 @@
     qbittorrent
     tor-browser
     ungoogled-chromium
+    octaveFull
+    vlc
   ]) ++ (with pkgs.gnomeExtensions; [ appindicator system-monitor ]);
 
   fonts.fontconfig.enable = true;
@@ -19,24 +21,9 @@
       "com.github.tchx84.Flatseal"
       "org.prismlauncher.PrismLauncher"
       "com.usebottles.bottles"
-      "com.spotify.Client"
+
     ];
   };
-
-  services.flatpak.overrides = {
-    "com.spotify.Client".Context = {
-      filesystems = [
-        "${anti-ip.libspotifyadblock}"
-        "~/.config/spotify-adblock/config.toml"
-      ];
-    };
-    "com.spotify.Client".Environment = {
-      LD_PRELOAD = "${anti-ip.libspotifyadblock}/lib/libspotifyadblock.so";
-    };
-  };
-
-  home.file.".config/spotify-adblock/config.toml".source =
-    "${anti-ip.spotify-adblock-source}/config.toml";
 
   dconf.settings = lib.mkMerge [{
     "org/gnome/shell" = {
@@ -50,14 +37,18 @@
     enable = true;
     package = pkgs.vscodium;
     mutableExtensionsDir = false;
-    profiles.default.extensions =
-      (with pkgs.vscode-extensions; [ mkhl.direnv jnoortheen.nix-ide ])
-      ++ (pkgs.vscode-utils.extensionsFromVscodeMarketplace [{
-        name = "gitless";
-        publisher = "maattdd";
-        version = "11.7.2";
-        sha256 = "sha256-rYeZNBz6HeZ059ksChGsXbuOao9H5m5lHGXJ4ELs6xc=";
-      }]);
+    profiles.default.extensions = (with pkgs.vscode-extensions; [
+      mkhl.direnv
+      jnoortheen.nix-ide
+      sumneko.lua
+      tomoki1207.pdf
+      teabyii.ayu
+    ]) ++ (pkgs.vscode-utils.extensionsFromVscodeMarketplace [{
+      name = "gitless";
+      publisher = "maattdd";
+      version = "11.7.2";
+      sha256 = "sha256-rYeZNBz6HeZ059ksChGsXbuOao9H5m5lHGXJ4ELs6xc=";
+    }]);
     profiles.default.userSettings = {
       "git.enableSmartCommit" = true;
       "window.menuBarVisibility" = "toggle";
@@ -72,6 +63,8 @@
       "[nix]".editor.formatOnSave = true;
       "diffEditor.ignoreTrimWhitespace" = false;
       "terminal.integrated.defaultProfile.linux" = "fish";
+      "workbench.preferredDarkColorTheme" = "Red";
+      "workbench.colorTheme" = "Red";
     };
   };
 }
